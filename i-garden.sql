@@ -203,7 +203,7 @@ DROP TABLE IF EXISTS `rusticite`;
 CREATE TABLE IF NOT EXISTS `rusticite` (
   `id_rusticite` int(11) NOT NULL AUTO_INCREMENT,
   `zone` varchar(10) NOT NULL,
-  `temperatureMinimale` varchar(5) NOT NULL,
+  `temperatureMinimale` varchar(10) NOT NULL,
   PRIMARY KEY (`id_rusticite`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
