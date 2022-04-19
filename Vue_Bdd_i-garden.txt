@@ -1,0 +1,47 @@
+VUES SPRINT N°1
+
+
+1ère vue
+CREATE VIEW Listes_des_plantes as 
+SELECT plante.nom, zones.nom, cyclevegetatif.libelle
+FROM plante join HistoriqueZonePlante ON plante.id_plante = HistoriqueZonePlante.id_plante
+JOIN zones ON HistoriqueZonePlante.id_zone = zones.id_zone
+JOIN HistoriqueCycle ON plante.id_plante = HistoriqueCycle.id_plante
+JOIN CycleVegetatif ON HistoriqueCycle.id_cycleVegetatif = cycleVegetatif.id_cycleVegetatif
+
+VUE N°2
+
+Plantes hors zone --> Liste des plantes affectées à aucune zone | Nom + Propriétaire s'il y a
+
+
+CREATE VIEW plantesHorsZone AS
+SELECT plante.nom, utilisateurs.id_utilisateur
+FROM plante
+INNER JOIN HistoriqueZonePlante ON plante.id_plante = historiqueZonePlante.id_plante
+INNER JOIN Zones ON historiqueZonePlante.id_zone = Zones.id_zone
+INNER JOIN Jardins ON Zones.id_jardin = Jardins.id_jardin
+INNER JOIN Jardins_Utilisateurs ON Jardins.id_jardin = Jardins_Utilisateurs.id_jardin
+INNER JOIN Utilisateurs ON Jardins_Utilisateurs.id_utilisateurs = Utilisateurs.id_utilisateur
+WHERE historiqueZonePlante.id_zone NOT IN (Select id_zone FROM Zones)
+
+
+
+VUE N°3
+
+Zones Recap --> Liste des zones | Nom + code rusticité + nombre de plantes affectées
+
+
+CREATE VIEW listeZones AS
+SELECT zones.nom, rusticite.zone, COUNT(historiqueZonePlante.id_plante)
+FROM Zones
+INNER JOIN historiqueZonePlante ON Zones.id_zone = historiqueZonePlante.id_zone
+INNER JOIN rusticite ON Zones.id_rusticite = rusticite.id_rusticite
+GROUP BY Zones.id_zone
+
+
+VUE N°4
+
+CREATE VIEW Plantes_recap as 
+SELECT graine.nom, graine.nomLatin, INITCAP(classificationPlante.libelle),  famillePlante.libelle
+FROM Graine JOIN ClassificationPlante ON Graine.id_classification = ClassificationPlante.id_classification
+JOIN Graine.id_famillePlante = FamillePlante.id_famillePlante
