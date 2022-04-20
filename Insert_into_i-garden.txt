@@ -1,0 +1,51 @@
+INSERT INTO utilisateurs (pseudo, email, motDePasse) VALUES ('User1', 'user1@gmail.com', '123abc'),
+('User2', 'user2@gmail.com', '123abc'), ('User3', 'user3@gmail.com', '123abc');
+
+INSERT INTO cyclevegetatif (libelle) VALUES ('germination'), ('croissance'), ('floraison'),
+('fructification'), ('mort');
+
+INSERT INTO status(libelle) VALUES ('Actif'), ('Passé'), ('Traité');
+
+INSERT INTO etatplante(libelle, id_status) VALUES ('Assoifée', '3'), ('Bonne santée', '1'),
+('Malade', '2');
+
+INSERT INTO classificationplante(libelle) VALUES ('Vivace'), ('Annuelle'),
+('Bisannuelle');
+
+
+INSERT INTO famillePlante(libelle, nom, id_parent) VALUES ('Famille', 'Cannabinaceaea', null), ('Genre', 'Cannabis', 1), ('Espece', 'Cannabis sativa', 2),
+('Famille', 'Caricaceae', null), ('Genre', 'Carica', 4), ('Espece', 'Carica papaya', 5), ('Famille', 'Convolvulaceae', null),
+('Genre', 'Ipomoea', 7), ('Espece', 'Ipomoea batatas', 8);
+
+INSERT INTO graine(nom, nomLatin, hauteurMaximale, photo, icone, description, id_famillePlante, id_classification) VALUES
+('patate douce', 'ipomoea batatas', 0.20, '', '', '', 8, 2), ('papayer', 'carica papaya', 6.00, '', '', '', 5, 1),
+('cannabis', 'cannabis sativa', 4.00, '', '', '', 2, 2);
+
+INSERT INTO rusticite(zone, temperatureMinimale, temperatureMaximale) VALUES ('Zone 1', -45.0, -45.0), 
+('Zone 2', -45.0, -40.0), ('Zone 3', -40.0, -34.0), ('Zone 4', -34.0, -29.0), ('Zone 5', -29.0, -23.0), ('Zone 6', -23.0, -18.0), ('Zone 7', -18.0, -12.0),
+('Zone 8', -12.0, -7.0), ('Zone 8a', -12.2, -9.4), ('Zone 8b', -9.4, -6.7) ,('Zone 9', -7.0, -1.0), ('Zone 9a', -6.7, -3.9), ('Zone 9b', -3.9, -1.1),
+('Zone 10', -1.0, +4.0), ('Zone 11', 0.0, +4.0);
+
+INSERT INTO jardins(nom, codePostal, id_rusticite) VALUES ('Le Jardin vla cool', '35500', 7), ('Le Jardin moins cool', '35550', 5),
+('Le Jardin moyen', '35100', 11);
+
+INSERT INTO jardins_utilisateurs(id_jardin, id_utilisateur) VALUES (1, 2), (2, 1),
+(3, 3);
+
+INSERT INTO zones(nom, typeDeSol, description, id_jardin, id_rusticite) VALUES 
+('zones fruits', 'sol riche', 'plantation de fruits', 2, 5), ('zones légumes', 'sol abrité', 'plantation de légumes', 1, 7),
+('zones fleurs', 'sol argileux', 'plantation de fleurs', 3, 11);
+
+INSERT INTO plante(dateSemis, dateRepiquage, dateFloraison, dateRecolte, quantiteRecoltee, id_graine) VALUES
+('2022-04-20 12:05:48', '2022-04-20 12:05:48', '2022-04-20 12:05:48', '2022-04-20 12:05:48', 100.00, 1),
+('2022-04-20 12:05:48', '2022-04-20 12:05:48', '2022-04-20 12:05:48', '2022-04-20 12:05:48', 50.00, 2),
+('2022-04-20 12:05:48', '2022-04-20 12:05:48', '2022-04-20 12:05:48', '2022-04-20 12:05:48', 4.00, 3);
+
+INSERT INTO historiquezoneplante(id_plante, id_zone, date) VALUES (1, 2, '2022-04-20 12:05:48'), (2, 1, '2022-04-20 12:05:48'),
+(3, 3, '2022-04-20 12:05:48');
+
+INSERT INTO historiquecycle(id_cycleVegetatif, id_plante, date) VALUES (1, 2, '2022-04-20 12:05:48'), (2, 1, '2022-04-20 12:05:48'),
+(3, 3, '2022-04-20 12:05:48');
+
+INSERT INTO historiqueetat(id_etatPlante, id_plante, date) VALUES (1, 2, '2022-04-20 12:05:48'), (2, 1, '2022-04-20 12:05:48'),
+(3, 3, '2022-04-20 12:05:48');
